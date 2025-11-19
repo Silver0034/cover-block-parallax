@@ -1,0 +1,24 @@
+{
+	"name": "cover-block-parallax",
+	"version": "1.0.0",
+	"description": "Build tools for Cover Block Parallax",
+	"scripts": {
+		"build": "gulp"
+	},
+	"devDependencies": {
+		"@babel/core": "latest",
+		"@babel/preset-env": "latest",
+		"@babel/preset-typescript": "latest",
+		"gulp": "latest",
+		"gulp-babel": "latest",
+		"gulp-clean-css": "^4.3.0",
+		"gulp-if": "latest",
+		"gulp-rename": "latest",
+		"gulp-sass": "latest",
+		"gulp-sourcemaps": "latest",
+		"gulp-terser": "latest",
+		"gulp-typescript": "latest",
+		"javascript-obfuscator": "latest",
+		"sass": "latest"
+	}
+}
