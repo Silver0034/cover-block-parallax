@@ -1,4 +1,5 @@
-const blockSelectors = '.wp-block-cover, .wp-block-media-text'
+const blockSelectors =
+	'.wp-block-cover, .wp-block-media-text.is-image-fill-element'
 const imageSelectors =
 	'.wp-block-cover__image-background, .wp-block-media-text__media img'
 
@@ -11,8 +12,13 @@ const debounce = (func, wait) => {
 }
 
 const backgroundParallax = (section) => {
-	const sections = document.querySelectorAll(section)
+	const allSections = document.querySelectorAll(section)
 	let ticking = false
+
+	// filter out all sections that have class no-parallax
+	const sections = Array.from(allSections).filter(
+		(el) => !el.classList.contains('no-parallax')
+	)
 
 	sections.forEach((element) => {
 		const parallaxEl = element.querySelector(imageSelectors)
@@ -45,8 +51,16 @@ const backgroundParallax = (section) => {
 			}
 
 			// Only update if value changed
-			if (parallaxEl.style.height !== `${elementHeight}px`) {
-				parallaxEl.style.height = `${elementHeight}px`
+			let newHeight = `${elementHeight}px`
+			if (
+				element.classList.contains('wp-block-media-text') &&
+				element.classList.contains('is-stacked-on-mobile') &&
+				window.innerWidth < 600
+			) {
+				newHeight = 'auto'
+			}
+			if (parallaxEl.style.height !== newHeight) {
+				parallaxEl.style.height = newHeight
 			}
 			parallaxEl.style.setProperty('--translate-y', `${-translate}px`)
 		})
@@ -66,4 +80,3 @@ const backgroundParallax = (section) => {
 }
 
 backgroundParallax(blockSelectors)
-console.log('trigger on scroll')
